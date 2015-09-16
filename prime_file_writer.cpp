@@ -22,31 +22,40 @@ void prime(int &range)
 	vector<int> primes;
 	primes.push_back(2);
 	file << primes.back() << endl;
-	primes.push_back(3);
-	file << primes.back() << endl;
-	primes.push_back(5);
-	file << primes.back() << endl;
-
-	int check = 0;
-	for (int i = 7; i <= range; i += 2)
+	if (range >= 3)
+    {
+        primes.push_back(3);
+        file << primes.back() << endl;
+    }
+	if (range >= 5)
 	{
-		for (vector<int>::iterator it = primes.begin() ; it != primes.end(); ++it)
-        {
-            if (i % *it == 0)
-            {
-                ++check;
-                break;
-            }
-		}
-        if (check == 0)
-        {
-            primes.push_back(i);
-            file << primes.back() << endl;
-        }
-        check = 0;
+	    primes.push_back(5);
+        file << primes.back() << endl;
 	}
+	if (range >= 7)
+    {
+        int check = 0;
+        for (int i = 7; i <= range; i += 2)
+        {
+            for (vector<int>::iterator it = primes.begin() ; it != primes.end(); ++it)
+            {
+                if (i % *it == 0)
+                {
+                    ++check;
+                    break;
+                }
+            }
+            if (check == 0)
+            {
+                primes.push_back(i);
+                file << primes.back() << endl;
+            }
+            check = 0;
+        }
+    }
 	file.close();
 }
+
 int main()
 {
     int range;
